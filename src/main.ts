@@ -5,6 +5,7 @@ import * as compression from 'compression';
 import { AppModule } from './app.module';
 import { FormattedResponseInterceptor } from './interceptors/response.interceptor';
 import { TIMEZONES } from './constants';
+import { configureSwagger } from './swagger';
 
 async function bootstrap() {
   process.env.TZ = TIMEZONES.LAGOS; // Set default timezone
@@ -20,6 +21,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalInterceptors(new FormattedResponseInterceptor());
 
+  configureSwagger(app);
   await app.listen(+PORT, () => logger.log(`App Running on Port: ${PORT}`));
 }
 bootstrap();
