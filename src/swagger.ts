@@ -16,6 +16,7 @@ export const configureSwagger = (app: INestApplication): void => {
     .setTitle(documentTitle.trim())
     .setDescription('API Documentation for Gate Pass Tracker')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config, {});

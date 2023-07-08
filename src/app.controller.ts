@@ -22,6 +22,7 @@ import { User } from '@prisma/client';
 import { ChangePasswordDTO } from './dtos/change-password.dto';
 import { ChangePasswordHandler } from './handlers/change-password.handler';
 import { SecurityPersonnelGuard } from './guards/security.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
@@ -35,12 +36,15 @@ export class AppController {
   ) {}
 
   @Post('/auth/login')
+  @ApiTags('Auth')
   loginUser(@Body() dto: LoginDTO) {
     return this.loginHandler.handle(dto);
   }
 
   @Post('/auth/change-password')
+  @ApiTags('Auth')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   changePassword(
     @Body() dto: ChangePasswordDTO,
     @AuthUser() user: Partial<User>,
@@ -49,30 +53,40 @@ export class AppController {
   }
 
   @Post('/users')
+  @ApiTags('Users')
   @UseGuards(AdminAuthGuard)
+  @ApiBearerAuth()
   addUserAccount(@Body() dto: AddUserDTO) {
     return this.addUserHandler.handle(dto);
   }
 
   @Get('/users')
+  @ApiTags('Users')
   @UseGuards(AdminAuthGuard)
+  @ApiBearerAuth()
   getUsers(@Query() query) {
     return this.getUsersHandler.handle(query);
   }
 
   @Get('/users/me')
+  @ApiTags('Users')
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   getAuthUserInfo() {
     // handler goes here
   }
 
   @Get('/users/:id')
+  @ApiTags('Users')
   @UseGuards(AdminAuthGuard)
   getUserDetail() {
     // handler goes here
   }
 
   @Post('/passes/generate')
+  @ApiTags('Gatepass')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   generateGatePass(
     @Body() dto: GeneratePassDTO,
     @AuthUser() user: Partial<User>,
@@ -81,7 +95,9 @@ export class AppController {
   }
 
   @Get('/passes/verify/:passCode')
+  @ApiTags('Gatepass')
   @UseGuards(SecurityPersonnelGuard)
+  @ApiBearerAuth()
   verifyGatePass(@Param('passCode') passCode: string) {
     return this.verifyGatePassHandler.handle(passCode);
   }
