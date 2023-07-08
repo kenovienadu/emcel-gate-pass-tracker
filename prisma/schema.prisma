@@ -2,10 +2,53 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  binaryTargets   = ["native", "debian-openssl-1.1.x", "linux-arm64-openssl-1.1.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  RESIDENT
+  ADMIN
+  SECURITY
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+model User {
+  id                  String            @unique @id @default(uuid())
+  firstName           String
+  lastName            String
+  email               String
+  phone               String
+  address             String
+  createdById         String?
+  passwordHash        String
+  role                UserRole          @default(RESIDENT)
+  status              UserStatus        @default(ACTIVE)
+  canCreatePasses     Boolean           @default(true)
+  hasChangedPassword  Boolean           @default(false)
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  deletedAt           DateTime?
+  passes              GatePass[]
+}
+
+model GatePass {
+  id                  String            @unique @id @default(uuid())
+  generatedByUserId   String
+  code                String?
+  generatedBy         User              @relation(fields: [generatedByUserId], references: [id])
+  createdAt           DateTime          @default(now())
+  expiresAt           DateTime
+  lastUsedAt          DateTime?
+  allowMultipleUses   Boolean           @default(false)
 }
