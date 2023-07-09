@@ -1,7 +1,3 @@
-import { VerifyGatePassHandler } from './handlers/verify-gatepass.handler';
-import { GeneratePassHandler } from './handlers/generate-pass.handler';
-import { GetUsersHandler } from './handlers/get-users.handler';
-import { AddUserHandler } from './handlers/add-user.handler';
 import {
   Body,
   Controller,
@@ -11,6 +7,12 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { VerifyGatePassHandler } from './handlers/verify-gatepass.handler';
+import { GeneratePassHandler } from './handlers/generate-pass.handler';
+import { GetUsersHandler } from './handlers/get-users.handler';
+import { AddUserHandler } from './handlers/add-user.handler';
 import { AddUserDTO } from './dtos/add-user.dto';
 import { LoginHandler } from './handlers/login.handler';
 import { LoginDTO } from './dtos/login.dto';
@@ -18,11 +20,9 @@ import { AdminAuthGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { GeneratePassDTO } from './dtos/generate-pass.dto';
 import { AuthUser } from './decorators/user.decorator';
-import { User } from '@prisma/client';
 import { ChangePasswordDTO } from './dtos/change-password.dto';
 import { ChangePasswordHandler } from './handlers/change-password.handler';
 import { SecurityPersonnelGuard } from './guards/security.guard';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
