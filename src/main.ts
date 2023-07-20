@@ -13,7 +13,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   const logger = new Logger('APP_INIT');
-  const PORT = config.get('PORT') || 4301;
+  const PORT = config.get('PORT') || 3000;
 
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('v1/api');
