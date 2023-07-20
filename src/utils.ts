@@ -3,9 +3,7 @@ import { isNumberString } from 'class-validator';
 /* eslint-disable @typescript-eslint/no-var-requires */
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const fs = require('graceful-fs');
 const dotenv = require('dotenv');
-const { v4: uuid } = require('uuid');
 
 dotenv.config();
 
