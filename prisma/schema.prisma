@@ -23,6 +23,12 @@ enum UserStatus {
   DISABLED
 }
 
+enum GuestArrivalMode {
+  NoVehicle
+  Vehicle
+  Unknown
+}
+
 model User {
   id                  String            @unique @id @default(uuid())
   firstName           String
@@ -43,12 +49,14 @@ model User {
 }
 
 model GatePass {
-  id                  String            @unique @id @default(uuid())
+  id                  String              @unique @id @default(uuid())
   generatedByUserId   String
   code                String?
-  generatedBy         User              @relation(fields: [generatedByUserId], references: [id])
-  createdAt           DateTime          @default(now())
+  guestName           String?
+  arrivalMode         GuestArrivalMode?  @default(Unknown)
+  generatedBy         User                @relation(fields: [generatedByUserId], references: [id])
+  createdAt           DateTime            @default(now())
   expiresAt           DateTime
   lastUsedAt          DateTime?
-  allowMultipleUses   Boolean           @default(false)
+  allowMultipleUses   Boolean             @default(false)
 }

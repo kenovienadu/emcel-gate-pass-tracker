@@ -91,7 +91,7 @@ export class AppController {
     @Body() dto: GeneratePassDTO,
     @AuthUser() user: Partial<User>,
   ) {
-    return this.generateGatePassHandler.handle(user.id, dto?.allowMultipleUses);
+    return this.generateGatePassHandler.handle(user.id, dto);
   }
 
   @Get('/passes/verify/:passCode')
