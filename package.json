@@ -37,6 +37,7 @@
     "class-validator": "^0.14.0",
     "compression": "^1.7.4",
     "date-fns": "^2.30.0",
+    "graceful-fs": "^4.2.11",
     "jsonwebtoken": "^9.0.1",
     "otp-generator": "^4.0.1",
     "prisma": "^4.16.2",
