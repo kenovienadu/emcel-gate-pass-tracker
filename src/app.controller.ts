@@ -98,7 +98,10 @@ export class AppController {
   @ApiTags('Gatepass')
   @UseGuards(SecurityPersonnelGuard)
   @ApiBearerAuth()
-  verifyGatePass(@Param('passCode') passCode: string) {
-    return this.verifyGatePassHandler.handle(passCode);
+  verifyGatePass(
+    @Param('passCode') passCode: string,
+    @AuthUser() user: Partial<User>,
+  ) {
+    return this.verifyGatePassHandler.handle(passCode, user);
   }
 }

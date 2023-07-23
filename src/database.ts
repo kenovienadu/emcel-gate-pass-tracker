@@ -62,11 +62,16 @@ export const dbClient = prismaClient.$extends({
     },
 
     gatePass: {
-      async updateLastUsed(passId: string, timestamp: Date = null) {
+      async updateLastUsed(
+        passId: string,
+        userId: string,
+        timestamp: Date = null,
+      ) {
         return prismaClient.gatePass.update({
           where: { id: passId },
           data: {
             lastUsedAt: timestamp || getCurrentTimestamp(),
+            lastVerifiedById: userId,
           },
         });
       },

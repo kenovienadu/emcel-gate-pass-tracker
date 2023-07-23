@@ -1,4 +1,4 @@
-import { UserStatus } from '@prisma/client';
+import { User, UserStatus } from '@prisma/client';
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { getCurrentTimestamp } from './../utils';
 import { PASSCODE_LENGTH } from './../constants';
@@ -6,7 +6,7 @@ import { dbClient } from './../database';
 
 @Injectable()
 export class VerifyGatePassHandler {
-  async handle(passCode: string) {
+  async handle(passCode: string, authUser: Partial<User>) {
     if (passCode.length !== PASSCODE_LENGTH) {
       throw new BadRequestException('Invalid code');
     }
@@ -43,7 +43,11 @@ export class VerifyGatePassHandler {
       throw new BadRequestException('Gate pass used');
     }
 
-    await dbClient.gatePass.updateLastUsed(gatePass.id);
+    if (gatePass.generatedByUserId === authUser.id) {
+      throw new BadRequestException('Cannot verify your own gatepass');
+    }
+
+    await dbClient.gatePass.updateLastUsed(gatePass.id, authUser.id);
     return gatePass;
   }
 }
