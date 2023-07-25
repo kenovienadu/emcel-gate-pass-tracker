@@ -10,6 +10,8 @@ import { GetUsersHandler } from './handlers/get-users.handler';
 import { GeneratePassHandler } from './handlers/generate-pass.handler';
 import { ChangePasswordHandler } from './handlers/change-password.handler';
 import { VerifyGatePassHandler } from './handlers/verify-gatepass.handler';
+import { ResetPasswordHandler } from './handlers/reset-password.handler';
+import { GetUserHandler } from './handlers/get-user.handler';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { VerifyGatePassHandler } from './handlers/verify-gatepass.handler';
     GeneratePassHandler,
     ChangePasswordHandler,
     VerifyGatePassHandler,
+    ResetPasswordHandler,
+    GetUserHandler,
   ],
 })
 export class AppModule implements OnModuleInit, OnModuleDestroy {
