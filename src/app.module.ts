@@ -1,7 +1,9 @@
+import { GatepassController } from './controllers/gate-pass.controller';
+import { UserController } from './controllers/user.controller';
 import { ConfigModule } from '@nestjs/config';
 import { Module, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import { prismaClient } from './database';
-import { AppController } from './app.controller';
+import { prismaClient } from './others/database';
+import { AuthController } from './controllers/auth.controller';
 import { AddUserHandler } from './handlers/add-user.handler';
 import { LoginHandler } from './handlers/login.handler';
 import { GetUsersHandler } from './handlers/get-users.handler';
@@ -16,7 +18,7 @@ import { VerifyGatePassHandler } from './handlers/verify-gatepass.handler';
       cache: true,
     }),
   ],
-  controllers: [AppController],
+  controllers: [AuthController, UserController, GatepassController],
   providers: [
     AddUserHandler,
     LoginHandler,

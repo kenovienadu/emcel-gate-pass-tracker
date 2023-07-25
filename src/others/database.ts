@@ -25,7 +25,7 @@ export const dbClient = prismaClient.$extends({
   name: 'checkPassword',
   model: {
     user: {
-      async getByIdentifier(emailOrId: string) {
+      async findByEmailOrId(emailOrId: string) {
         const user = await _getUserByIdentifier(emailOrId);
         return user || null;
       },
@@ -52,7 +52,7 @@ export const dbClient = prismaClient.$extends({
             id: user.id,
           },
           data: {
-            passwordHash: hashPassword(password),
+            passwordHash: hashPassword(normalizeString(password)),
             hasChangedPassword: true,
           },
         });

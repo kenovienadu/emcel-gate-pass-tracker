@@ -1,7 +1,7 @@
 import { UserRole } from '@prisma/client';
 import { Injectable, Scope, BadRequestException } from '@nestjs/common';
-import { generateJWT } from './../utils';
-import { dbClient } from './../database';
+import { generateJWT } from '../others/utils';
+import { dbClient } from '../others/database';
 import { LoginDTO } from './../dtos/login.dto';
 import { subHours } from 'date-fns';
 

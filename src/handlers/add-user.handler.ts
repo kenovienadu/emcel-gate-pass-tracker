@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { isEmail } from 'class-validator';
-import { DEFAULT_PASSWORD } from './../constants';
-import { normalizeString, hashPassword } from './../utils';
-import { AddUserDTO } from '../dtos/add-user.dto';
-import { dbClient } from '../database';
 import { UserRole } from '@prisma/client';
+import { isEmail } from 'class-validator';
+import { DEFAULT_PASSWORD } from '../others/constants';
+import { normalizeString, hashPassword } from '../others/utils';
+import { AddUserDTO } from '../dtos/add-user.dto';
+import { dbClient } from '../others/database';
 
 @Injectable()
 export class AddUserHandler {

@@ -1,8 +1,8 @@
 import { User, UserStatus } from '@prisma/client';
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { getCurrentTimestamp } from './../utils';
-import { PASSCODE_LENGTH } from './../constants';
-import { dbClient } from './../database';
+import { getCurrentTimestamp } from '../others/utils';
+import { PASSCODE_LENGTH } from '../others/constants';
+import { dbClient } from '../others/database';
 
 @Injectable()
 export class VerifyGatePassHandler {

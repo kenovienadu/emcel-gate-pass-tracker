@@ -1,6 +1,6 @@
-import { getCurrentTimestamp } from './../utils';
+import { getCurrentTimestamp } from '../others/utils';
 import { Injectable, Scope } from '@nestjs/common';
-import { dbClient } from '../database';
+import { dbClient } from '../others/database';
 import { addHours } from 'date-fns';
 import * as otpGenerator from 'otp-generator';
 import { GeneratePassDTO } from '../dtos/generate-pass.dto';
