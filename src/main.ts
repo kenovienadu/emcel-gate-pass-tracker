@@ -4,8 +4,8 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import * as compression from 'compression';
 import { AppModule } from './app.module';
 import { FormattedResponseInterceptor } from './interceptors/response.interceptor';
-import { TIMEZONES } from './constants';
-import { configureSwagger } from './swagger';
+import { TIMEZONES } from './others/constants';
+import { configureSwagger } from './others/swagger';
 
 async function bootstrap() {
   process.env.TZ = TIMEZONES.LAGOS; // Set default timezone

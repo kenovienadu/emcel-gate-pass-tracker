@@ -1,7 +1,9 @@
-import { normalizeString } from './../utils';
+import { normalizeString } from '../others/utils';
 import { isUUID } from 'class-validator';
-import { dbClient } from './../database';
+import { dbClient } from '../others/database';
+import { Injectable, Scope } from '@nestjs/common';
 
+@Injectable({ scope: Scope.REQUEST })
 export class GetUserHandler {
   private db = dbClient;
 

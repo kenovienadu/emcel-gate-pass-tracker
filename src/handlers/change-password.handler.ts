@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { dbClient } from './../database';
+import { dbClient } from '../others/database';
 import { ChangePasswordDTO } from '../dtos/change-password.dto';
 
 @Injectable()

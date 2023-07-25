@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { verifyJWT } from '../utils';
+import { verifyJWT } from '../others/utils';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

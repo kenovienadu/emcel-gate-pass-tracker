@@ -1,8 +1,8 @@
 import { Prisma, UserRole } from '@prisma/client';
 import { Injectable, Scope, BadRequestException } from '@nestjs/common';
 import { isEnum } from 'class-validator';
-import { dbClient } from './../database';
-import { getPaginationParamsFromQuery } from '../utils';
+import { dbClient } from '../others/database';
+import { getPaginationParamsFromQuery } from '../others/utils';
 
 @Injectable({ scope: Scope.REQUEST })
 export class GetUsersHandler {
