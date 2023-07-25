@@ -23,6 +23,7 @@ import { AuthUser } from './decorators/user.decorator';
 import { ChangePasswordDTO } from './dtos/change-password.dto';
 import { ChangePasswordHandler } from './handlers/change-password.handler';
 import { SecurityPersonnelGuard } from './guards/security.guard';
+import { GetUserHandler } from './handlers/get-user.handler';
 
 @Controller()
 export class AppController {
@@ -33,6 +34,7 @@ export class AppController {
     private generateGatePassHandler: GeneratePassHandler,
     private changePasswordHandler: ChangePasswordHandler,
     private verifyGatePassHandler: VerifyGatePassHandler,
+    private getSingleUserHandler: GetUserHandler,
   ) {}
 
   @Post('/auth/login')
@@ -58,6 +60,14 @@ export class AppController {
   @ApiBearerAuth()
   addUserAccount(@Body() dto: AddUserDTO) {
     return this.addUserHandler.handle(dto);
+  }
+
+  @Get('/users/:id')
+  @ApiTags('Users')
+  @UseGuards(AdminAuthGuard)
+  @ApiBearerAuth()
+  getUserDetails(@Param('id') id: string) {
+    return this.getSingleUserHandler.handle(id);
   }
 
   @Get('/users')
